@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "easy-email-downloader"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = ["Daniel Tomlinson <dtomlinson@panaetius.co.uk>"]
 license = "ISC"
@@ -12,8 +12,8 @@ python = "^3.8"
 prospector = {extras = ["with_bandit", "with_mypy"], version = "^1.7.7"}
 black = "^22.3.0"
 isort = "^5.10.1"
-mypy = "^0.942"
 duty = "^0.7.0"
+mypy = "^0.942"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

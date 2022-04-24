@@ -11,8 +11,8 @@ from typing import Optional
 
 from duty import duty
 
-PACKAGE_NAME = "tembo"
-REPO_URL = "https://github.com/tembo-pages/tembo-core"
+PACKAGE_NAME = "easy_email_downloader"
+REPO_URL = "https://github.com/dtomlinson91/easy-email-downloader"
 
 
 @duty(post=["export"])
@@ -85,7 +85,7 @@ def bump(ctx, version: str = "patch"):
     print(new_version.group(0))
 
     # update _version.py
-    version_file = pathlib.Path(PACKAGE_NAME) / "_version.py"
+    version_file = pathlib.Path(PACKAGE_NAME) / "__version__.py"
     with version_file.open("w", encoding="utf-8") as version_file:
         version_file.write(
             f'"""Module containing the version of {PACKAGE_NAME}."""\n\n' + f'__version__ = "{new_version.group(1)}"\n'
@@ -156,15 +156,15 @@ def export(ctx):
     Example:
         `duty export`
     """
-    requirements_content = ctx.run(
-        [
-            "poetry",
-            "export",
-            "-f",
-            "requirements.txt",
-            "--without-hashes",
-        ]
-    )
+    # requirements_content = ctx.run(
+    #     [
+    #         "poetry",
+    #         "export",
+    #         "-f",
+    #         "requirements.txt",
+    #         "--without-hashes",
+    #     ]
+    # )
     requirements_dev_content = ctx.run(
         [
             "poetry",
@@ -177,13 +177,13 @@ def export(ctx):
     )
 
     requirements = pathlib.Path(".") / "requirements.txt"
-    requirements_dev = pathlib.Path(".") / "requirements_dev.txt"
+    # requirements_dev = pathlib.Path(".") / "requirements_dev.txt"
 
     with requirements.open("w", encoding="utf-8") as req:
-        req.write(requirements_content)
-
-    with requirements_dev.open("w", encoding="utf-8") as req:
         req.write(requirements_dev_content)
+
+    # with requirements_dev.open("w", encoding="utf-8") as req:
+    #     req.write(requirements_dev_content)
 
 
 @duty
