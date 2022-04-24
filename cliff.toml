@@ -12,9 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 # https://tera.netlify.app/docs/#introduction
 body = """
 {% if version %}\
-    ## [{{ version }}](https://github.com/tembo-pages/tembo-core/commits/{{ version }}) - {{ timestamp | date(format="%Y-%m-%d") }}
+    ## [{{ version }}](https://github.com/dtomlinson91/easy-email-downloader/commits/{{ version }}) - {{ timestamp | date(format="%Y-%m-%d") }}
     {% if previous.version %}\
-    <small>[Compare with {{ previous.version }}](https://github.com/tembo-pages/tembo-core/compare/{{ previous.version }}...{{ version }})</small>
+    <small>[Compare with {{ previous.version }}](https://github.com/dtomlinson91/easy-email-downloader/compare/{{ previous.version }}...{{ version }})</small>
     {% endif %}\
 {% else %}\
     ## [unreleased]
@@ -22,7 +22,7 @@ body = """
 {% for group, commits in commits | group_by(attribute="group") %}
     ### {{ group | upper_first }}
     {% for commit in commits %}
-        - {{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/tembo-pages/tembo-core/commit/{{ commit.id }}))\
+        - {{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/dtomlinson91/easy-email-downloader/commit/{{ commit.id }}))\
     {% endfor %}
 {% endfor %}\n
 """
