@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "easy-email-downloader"
+version = "0.1.0"
+description = ""
+authors = ["Daniel Tomlinson <dtomlinson@panaetius.co.uk>"]
+license = "ISC"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+prospector = {extras = ["with_bandit", "with_mypy"], version = "^1.7.7"}
+black = "^22.3.0"
+isort = "^5.10.1"
+mypy = "^0.942"
+duty = "^0.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+line_length = 120
+multi_line_output = 3
+force_single_line = false
+balanced_wrapping = true
+default_section = "THIRDPARTY"
+known_first_party = "duty"
+include_trailing_comma = true
+
+[tool.mypy]
+ignore_missing_imports = true

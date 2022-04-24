@@ -1,0 +1,125 @@
+output-format: vscode
+doc-warnings: true
+strictness: none
+
+ignore-patterns:
+  - (^|/)\..+
+
+# https://pylint.pycqa.org/en/latest/technical_reference/features.html
+pylint:
+  run: true
+  disable:
+    # disables TODO warnings
+    - fixme
+# !doc docstrings
+    - missing-module-docstring
+    - missing-class-docstring
+    - missing-function-docstring
+# ! doc end of docstrings
+    # disables warnings about abstract methods not overridden
+    - abstract-method
+    # used when an ancestor class method has an __init__ method which is not called by a derived class.
+    - super-init-not-called
+    # either all return statements in a function should return an expression, or none of them should.
+    # - inconsistent-return-statements
+    # Used when an expression that is not a function call is assigned to nothing. Probably something else was intended.
+    # - expression-not-assigned
+    # Used when a line is longer than a given number of characters.
+    - line-too-long
+  enable:
+  options:
+    max-locals: 15
+    max-returns: 6
+    max-branches: 12
+    max-statements: 50
+    max-parents: 7
+    max-attributes: 20
+    min-public-methods: 0
+    max-public-methods: 25
+    max-module-lines: 1000
+    max-line-length: 99
+    max-args: 8
+
+mccabe:
+  run: true
+  options:
+    max-complexity: 10
+
+# https://pep8.readthedocs.io/en/release-1.7.x/intro.html#error-codes
+pep8:
+  run: true
+  options:
+    max-line-length: 99
+    single-line-if-stmt: n
+  disable:
+    # line too long
+    - E501
+
+pyroma:
+  run: false
+  disable:
+    - PYR19
+    - PYR16
+
+# https://pep257.readthedocs.io/en/latest/error_codes.html
+# http://www.pydocstyle.org/en/6.1.1/error_codes.html
+pep257:
+  disable:
+# !doc docstrings
+    # Missing docstring in public package
+    - D104
+    # Missing docstring in __init__
+    - D107
+    # Missing docstring in public module
+    - D100
+    # Missing docstring in public class
+    - D101
+    # Missing docstring in public method
+    - D102
+    # Missing docstring in public function
+    - D103
+    # Missing docstring in magic method
+    - D105
+    # One-line docstring should fit on one line with quotes
+    - D200
+    # No blank lines allowed after function docstring
+    - D202
+    # Multi-line docstring summary should start at the second line
+    - D213
+    # First word of the docstring should not be This
+    - D404
+    # DEFAULT IGNORES
+    # 1 blank line required before class docstring
+    - D203
+    # Multi-line docstring summary should start at the first line
+    - D212
+# !doc end of docstrings
+    # Section name should end with a newline
+    - D406
+    # Missing dashed underline after section
+    - D407
+    # Missing blank line after last section
+    - D413
+
+# https://flake8.pycqa.org/en/latest/user/error-codes.html
+pyflakes:
+  disable:
+    # module imported but unused
+    - F401
+
+dodgy:
+  run: true
+
+bandit:
+  run: true
+  # options:
+    # ignore assert warning
+    # - B101
+
+mypy:
+  run: true
+  options:
+    # https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-type-hints-for-third-party-library
+    ignore-missing-imports: true
+    # https://mypy.readthedocs.io/en/stable/running_mypy.html#following-imports
+    follow-imports: normal
