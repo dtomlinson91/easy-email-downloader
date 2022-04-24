@@ -4,6 +4,11 @@ version = "1.0.0"
 description = ""
 authors = ["Daniel Tomlinson <dtomlinson@panaetius.co.uk>"]
 license = "ISC"
+readme = "./README.md"
+keywords = ["email", "download", "imap"]
+homepage = "https://github.com/dtomlinson91/easy-email-downloader"
+repository = "https://github.com/dtomlinson91/easy-email-downloader"
+documentation ="https://github.com/dtomlinson91/easy-email-downloader"
 
 [tool.poetry.dependencies]
 python = "^3.8"
