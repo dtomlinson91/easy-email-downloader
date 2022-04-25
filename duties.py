@@ -85,7 +85,7 @@ def bump(ctx, version: str = "patch"):
     print(new_version.group(0))
 
     # update _version.py
-    version_file = pathlib.Path(PACKAGE_NAME) / "__version__.py"
+    version_file = pathlib.Path(PACKAGE_NAME) / "_version.py"
     with version_file.open("w", encoding="utf-8") as version_file:
         version_file.write(
             f'"""Module containing the version of {PACKAGE_NAME}."""\n\n' + f'__version__ = "{new_version.group(1)}"\n'
