@@ -1,5 +1,9 @@
 # easy-email-downloader 📨
 
+![PyPI](https://img.shields.io/pypi/v/easy-email-downloader)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/easy-email-downloader)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/simple-email-sender)
+
 `easy-email-downloader` is a no nonsense and easy way to download emails from an IMAP server in Python with no
 3rd party dependencies.
 
