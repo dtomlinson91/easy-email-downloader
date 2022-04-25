@@ -33,7 +33,11 @@ To download emails from an IMAP server:
 from easy_email_downloader import EmailFilter, EmailConfig, download_emails
 
 email_config = EmailConfig(
-    host="mail.example.com", email_address="example@example.com", password="somepassword", mailbox="INBOX", port=993
+    host="mail.example.com",
+    email_address="example@example.com",
+    password="somepassword",
+    mailbox="INBOX",
+    port=993,
 )
 
 email_filter = EmailFilter(
