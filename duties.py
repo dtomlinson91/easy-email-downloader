@@ -73,22 +73,22 @@ def bump(ctx, version: str = "patch"):
     Args:
         ctx: The context instance (passed automatically).
         version (str, optional) = poetry version flag. Available options are:
-            patch, minor, major. Defaults to patch.
+            patch, minor, major, prepatch, preminor, premajor, prerelease.
+            See <https://python-poetry.org/docs/cli/#version> Defaults to patch.
 
     Example:
         `duty bump version=major`
     """
-
     # bump with poetry
     result = ctx.run(["poetry", "version", version])
-    new_version = re.search(r"(?:.*)(?:\s)(\d+\.\d+\.\d+)$", result)
+    new_version = re.search(r"(?<=to\s)([^\$]*)", result)
     print(new_version.group(0))
 
     # update _version.py
     version_file = pathlib.Path(PACKAGE_NAME) / "_version.py"
     with version_file.open("w", encoding="utf-8") as version_file:
         version_file.write(
-            f'"""Module containing the version of {PACKAGE_NAME}."""\n\n' + f'__version__ = "{new_version.group(1)}"\n'
+            f'"""Module containing the version of {PACKAGE_NAME}."""\n\n' + f'__version__ = "{new_version.group(0)}"\n'
         )
     print(f"Bumped _version.py to {new_version.group(1)}")
 
@@ -134,7 +134,9 @@ def release(ctx, version: str = "patch") -> None:
 
     Args:
         ctx: The context instance (passed automatically).
-        version (str): poetry version flag. Available options are: patch, minor, major.
+        version (str): poetry version flag.
+            Available options are: patch, minor, major, prepatch, preminor, premajor, prerelease.
+            See <https://python-poetry.org/docs/cli/#version>
     """
     print(ctx.run(["duty", "bump", f"version={version}"]))
     ctx.run(["duty", "build"])
