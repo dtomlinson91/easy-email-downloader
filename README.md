@@ -17,12 +17,22 @@ pip install easy-email-downloader
 
 ### From Source
 
-Using [Poetry](https://python-poetry.org)
+#### Using [Poetry](https://python-poetry.org)
+
+👍🏻 recommended
 
 Clone the repository and run:
 
 ```bash
 poetry install
+```
+
+#### setuptools
+
+Clone the repository and run in a virtual environment:
+
+```bash
+python setup.py install
 ```
 
 ## Usage
