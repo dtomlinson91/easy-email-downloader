@@ -15,7 +15,7 @@
 - Automatically download attachments (receipts/statements etc.) and save to disk.
 - Archive content of emails for personal use.
 
-See the installation & uses below.
+See the installation & examples below.
 
 Pull requests/ideas/suggestions are welcome 👍🏻
 
@@ -62,6 +62,7 @@ email_config = EmailConfig(
     port=993,
 )
 
+# The EmailFilter itself and all of its fields are optional. Sensible defaults are chosen if left out.
 email_filter = EmailFilter(
     subject="daily report",  # subject filtering is server specific - full string matches often won't work
     sender="someone@gmail.com",
