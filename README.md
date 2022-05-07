@@ -7,6 +7,18 @@
 `easy-email-downloader` is a no nonsense and easy way to download emails from an IMAP server in Python with no
 3rd party dependencies.
 
+## Uses
+
+- Extract data/logs etc. from email content for further parsing or saving to disk.
+- Calculate general statistics from your inbox (who's sending me the most etc.)
+- Get a list of all senders so you can identify who to unsubsribe from.
+- Automatically download attachments (receipts/statements etc.) and save to disk.
+- Archive content of emails for personal use.
+
+See the installation & uses below.
+
+Pull requests/ideas/suggestions are welcome 👍🏻
+
 ## Installation
 
 ### PyPI
@@ -176,3 +188,11 @@ Attributes:
 ```
 
 Attachments are stored as a list of bytes. These can be saved to disk using `open("filename", "wb")` in the usual way.
+
+## TODO
+
+- Extend attatchment logic to get filename of attatchment on server.
+  - Useful to save attatchments to disk automatically without the user having to implement `file.open(mode="wb")`.
+- CLI to download emails to json/csv etc.
+  - Should include a Dockerfile and an image published to Dockerhub.
+- Tests 🥱.
