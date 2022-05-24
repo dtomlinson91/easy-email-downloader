@@ -117,7 +117,7 @@ bandit:
     # - B101
 
 mypy:
-  run: false
+  run: true
   options:
     # https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-type-hints-for-third-party-library
     ignore-missing-imports: true
