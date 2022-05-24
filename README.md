@@ -82,7 +82,8 @@ for downloaded_email in downloaded_emails:
     print(f"subject: {downloaded_email.subject}")
     print(f"content_type: {downloaded_email.content_type}")
     print(f"body: {downloaded_email.body[:50]}")
-    print(f"attachments: {downloaded_email.attachments[:50]}")
+    for attachment in downloaded_email.attachments:
+        print(f"filename: {attachment.filename}")
 ```
 
 Which produces:
@@ -93,7 +94,7 @@ date: Sat, 23 Apr 2022 20:55:31 +0100
 subject: Download me using easy-email-sender
 content_type: text/html
 body: Successfully downloaded using easy-email-sender!
-attachments: []
+filename: hello.jpg
 ```
 
 See below for more information on `EmailFilter`, `EmailConfig`, `download_emails` or see the docstrings.
@@ -183,12 +184,20 @@ Attributes:
     subject (str): The email subject.
     date (str): The date the email was sent.
     body (str): The content of the email. This is either in plaintext or as HTML.
-    attachments (List[Optional[bytes]]): A list of attachments (if there are any) as bytes. If no attachments this
-        is an empty list.
+    attachments (List[Optional[Attachment]]): A list of attachments as
+        [Attachment][easy_email_downloader.models.Attachment] objects. If no attachments this is an empty list.
     content_type (str): The content type. Either `text/plain` or `text/html`.
 ```
 
-Attachments are stored as a list of bytes. These can be saved to disk using `open("filename", "wb")` in the usual way.
+Attachments are stored as `Attachment` objects containing the `filename` and `contents` (in bytes).
+
+These can be saved to disk:
+
+```
+for attachment in downloaded_emails.attachments:
+    with open(f"/some/path/{attachment.filename}", mode="wb") as attachment_contents:
+        attachment_contents.write(attachment.contents)
+```
 
 ## TODO
 

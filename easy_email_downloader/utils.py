@@ -11,7 +11,7 @@ from typing import Any, List, Tuple
 
 from easy_email_downloader.common import get_imap_instance
 from easy_email_downloader.exceptions import NoMessagesFoundError, NonExistentMailboxError
-from easy_email_downloader.models import Email, EmailConfig, EmailFilter
+from easy_email_downloader.models import Email, EmailConfig, EmailFilter, Attachment
 
 
 def download_emails(
@@ -199,7 +199,7 @@ def get_attachment(part: Message, email_object: Email) -> Email:
     Returns:
         Email: The `email_object` with the attachment appended to `email_object.attachments` as bytes.
     """
-    email_object.attachments.append(part.get_payload(decode=True))
+    email_object.attachments.append(Attachment(filename=part.get_filename(), contents=part.get_payload(decode=True)))
     return email_object
 
 

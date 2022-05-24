@@ -22,8 +22,8 @@ class Email:
         subject (str): The email subject.
         date (str): The date the email was sent.
         body (str): The content of the email. This is either in plaintext or as HTML.
-        attachments (List[Optional[bytes]]): A list of attachments (if there are any) as bytes. If no attachments this
-            is an empty list.
+        attachments (List[Optional[Attachment]]): A list of attachments as
+            [Attachment][easy_email_downloader.models.Attachment] objects. If no attachments this is an empty list.
         content_type (str): The content type. Either `text/plain` or `text/html`.
     """
 
@@ -31,7 +31,7 @@ class Email:
     subject: str = field(default_factory=lambda: "")
     date: str = field(default_factory=lambda: "")
     body: str = field(default_factory=lambda: "")
-    attachments: List[Optional[bytes]] = field(default_factory=lambda: [])
+    attachments: List[Optional[Attachment]] = field(default_factory=lambda: [])
     content_type: str = field(default_factory=lambda: "")
 
 
@@ -98,3 +98,17 @@ class EmailFilter:
     messages_to_download: int = -1
     oldest_first: bool = False
     delete_after_download: bool = False
+
+
+@dataclass
+class Attachment:
+    """
+    A dataclass used to represent an attatchment in an email.
+
+    Attributes:
+        filename (str | None, optional): The filename of the attachment. Defaults to None.
+        contents (bytes | None, optional): The contents of the attachment in bytes. Defaults to None.
+    """
+
+    filename: str | None = None
+    contents: bytes | None = None
