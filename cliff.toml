@@ -22,8 +22,9 @@ body = """
 {% for group, commits in commits | group_by(attribute="group") %}
     ### {{ group | upper_first }}
     {% for commit in commits %}
-        - {{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/dtomlinson91/easy-email-downloader/commit/{{ commit.id }}))\
-    {% endfor %}
+        - {% if commit.breaking %}💥 **breaking**: {% endif %}{{ commit.message | upper_first }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/dtomlinson91/easy-email-downloader/commit/{{ commit.id }}))\
+        {% if commit.breaking %}\n\n{{commit.footers.0 | upper_first}}{% endif %}\
+    {% endfor %}\
 {% endfor %}\n
 """
 # remove the leading and trailing whitespaces from the template
