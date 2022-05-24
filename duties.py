@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import importlib
 import os
 import pathlib
@@ -292,7 +293,8 @@ def check_docs(ctx):
     Args:
         ctx: The context instance (passed automatically).
     """
-    ctx.run(["mkdocs", "build"], title="Building documentation")
+    with contextlib.suppress(FileNotFoundError):
+        ctx.run(["mkdocs", "build"], title="Building documentation")
 
 
 @duty
@@ -305,36 +307,37 @@ def check_dependencies(ctx):
     Args:
         ctx: The context instance (passed automatically).
     """
-    for module in sys.modules:
-        if module.startswith("safety.") or module == "safety":
-            del sys.modules[module]
+    with contextlib.suppress(ModuleNotFoundError):
+        for module in sys.modules:
+            if module.startswith("safety.") or module == "safety":
+                del sys.modules[module]
 
-    importlib.invalidate_caches()
+        importlib.invalidate_caches()
 
-    from safety import safety
-    from safety.formatter import report
-    from safety.util import read_requirements
+        from safety import safety
+        from safety.formatter import report
+        from safety.util import read_requirements
 
-    requirements = ctx.run(
-        "poetry export --dev --without-hashes",
-        title="Exporting dependencies as requirements",
-        allow_overrides=False,
-    )
+        requirements = ctx.run(
+            "poetry export --dev --without-hashes",
+            title="Exporting dependencies as requirements",
+            allow_overrides=False,
+        )
 
-    def check_vulns():
-        packages = list(read_requirements(StringIO(requirements)))
-        vulns = safety.check(packages=packages, ignore_ids="41002", key="", db_mirror="", cached=False, proxy={})
-        output_report = report(vulns=vulns, full=True, checked_packages=len(packages))
-        print(vulns)
-        if vulns:
-            print(output_report)
+        def check_vulns():
+            packages = list(read_requirements(StringIO(requirements)))
+            vulns = safety.check(packages=packages, ignore_ids="41002", key="", db_mirror="", cached=False, proxy={})
+            output_report = report(vulns=vulns, full=True, checked_packages=len(packages))
+            print(vulns)
+            if vulns:
+                print(output_report)
 
-    ctx.run(
-        check_vulns,
-        stdin=requirements,
-        title="Checking dependencies",
-        pty=True,
-    )
+        ctx.run(
+            check_vulns,
+            stdin=requirements,
+            title="Checking dependencies",
+            pty=True,
+        )
 
 
 @duty
