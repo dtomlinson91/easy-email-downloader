@@ -66,8 +66,8 @@ email_config = EmailConfig(
 email_filter = EmailFilter(
     subject="daily report",  # subject filtering is server specific - full string matches often won't work
     sender="someone@gmail.com",
-    messages_to_download=1,
-    oldest_first=False,
+    messages_to_download=1,  # setting this to -1 will download all emails
+    oldest_first=False,  # whether to retrive the oldest emails first
     delete_after_download=False,  # be careful setting this to True - emails are permanently removed!
 )
 
