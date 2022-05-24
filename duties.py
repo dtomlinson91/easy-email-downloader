@@ -240,10 +240,10 @@ def format(ctx):
     Args:
         ctx: The context instance (passed automatically).
     """
-    res = ctx.run(["black", "--line-length=99", PACKAGE_NAME], pty=True, title="Running Black")
+    res = ctx.run(["black", "--line-length=120", PACKAGE_NAME], pty=True, title="Running Black")
     print(res)
 
-    res = ctx.run(["isort", PACKAGE_NAME])
+    res = ctx.run(["isort", "-l", "120", PACKAGE_NAME])
     print(res)
 
 
