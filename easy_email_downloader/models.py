@@ -70,7 +70,7 @@ class EmailConfig:
         """
         imap = get_imap_instance(self.host, self.email_address, self.password)
         mailboxes = imap.list()
-        return [mailbox.decode(encoding="utf-8") for mailbox in mailboxes[-1]]  # type: ignore - PylancereportUnknownMemberType
+        return [mailbox.decode(encoding="utf-8") for mailbox in mailboxes[-1] if isinstance(mailbox, bytes)]
 
 
 @dataclass
