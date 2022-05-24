@@ -11,7 +11,7 @@ from typing import Any, List, Tuple
 
 from easy_email_downloader.common import get_imap_instance
 from easy_email_downloader.exceptions import NoMessagesFoundError, NonExistentMailboxError
-from easy_email_downloader.models import Email, EmailConfig, EmailFilter, Attachment
+from easy_email_downloader.models import Attachment, Email, EmailConfig, EmailFilter
 
 
 def download_emails(
@@ -33,7 +33,9 @@ def download_emails(
     """
     # get imap instance
     imap = get_imap_instance(
-        host=email_config.host, email_address=email_config.email_address, password=email_config.password
+        host=email_config.host,
+        email_address=email_config.email_address,
+        password=email_config.password,
     )
 
     # get messages for mailbox
@@ -99,7 +101,11 @@ def fetch_messages(
             if isinstance(response, tuple):
                 email_object = Email()
                 msg = email.message_from_bytes(response[-1])  # noqa pylint(unsubscriptable-object)
-                email_object.subject, email_object.sender, email_object.date = get_subject_and_sender(msg)
+                (
+                    email_object.subject,
+                    email_object.sender,
+                    email_object.date,
+                ) = get_subject_and_sender(msg)
 
                 if msg.is_multipart():
                     email_object = get_multipart_email(msg=msg, email_object=email_object)
