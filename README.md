@@ -201,8 +201,8 @@ for attachment in downloaded_emails.attachments:
 
 ## TODO
 
-- Extend attatchment logic to get filename of attatchment on server.
-  - Useful to save attatchments to disk automatically without the user having to implement `file.open(mode="wb")`.
+- ~~Extend attatchment logic to get filename of attatchment on server.~~ ✅
+  - ~~Useful to save attatchments to disk automatically without the user having to implement `file.open(mode="wb")`.~~ ✅
 - CLI to download emails to json/csv etc.
   - Should include a Dockerfile and an image published to Dockerhub.
 - Tests 🥱.
